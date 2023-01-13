@@ -6,30 +6,33 @@
   <body>
     <div id="data"></div>
     <script>
-
-const axios = require('axios');
-
-function getSummaryFromCNN(url) {
-    const openaiApiUrl = "https://api.openai.com/v1/engines/davinci-codex/completions";
-    const secretKey = "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";
-
-    axios.post(openaiApiUrl, {
-        prompt: `Please summarize the article from this url: ${url}`,
-        max_tokens: 100,
-        temperature: 0.5
-    }, {
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${secretKey}`
-        }
-    }).then(response => {
-        console.log(response.data.choices[0].text);
-    }).catch(error => {
-        console.log(error);
-    });
+function getInfoFromURL(url) {
+  const openaiApiUrl = "https://api.openai.com/v1/engines/davinci-codex/completions";
+  const secretKey = "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";
+  
+  fetch(openaiApiUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${secretKey}`
+    },
+    body: JSON.stringify({
+      prompt: `Please summarize from this url: ${url}`,
+      max_tokens: 100,
+      temperature: 0.5
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.choices[0].text);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 }
 
-getSummaryFromCNN("https://www.cnn.com/2021/07/09/weather/tropical-storm-donna-forecast-wxc/index.html");
+getInfoFromURL("https://edition.cnn.com/2023/01/12/politics/afghanistan-withdrawal-investigation-house-foreign-affairs-committee");
+
 
     </script>
   </body>
