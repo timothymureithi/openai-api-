@@ -1,39 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>OpenAI Data</title>
-</head>
-<body>
-    <label>Enter URL:</label>
-    <input type="text" id="url">
-    <button onclick="getInfoFromURL()">Submit</button>
-    <div id="data"></div>
-    <script>
-        function getInfoFromURL() {
-            let url = document.getElementById("url").value;
-            const openaiApiUrl = "https://api.openai.com/v1/engines/davinci-codex/completions";
-            const secretKey = "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";
-            fetch(openaiApiUrl, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${secretKey}`
-                },
-                body: JSON.stringify({
-                    prompt: `Please summarize from this url: ${url}`,
-                    max_tokens: 100,
-                    temperature: 0.5
-                })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    let summary = data.choices[0].text;
-                    document.getElementById("data").innerHTML = summary;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-    </script>
-</body>
+  <head>
+    <title>OPENAI Study Notes</title>
+  </head>
+  <body>
+    <script src="index.js"></script>
+    <script src="dist/bundle.js"></script>
+
+  </body>
 </html>
