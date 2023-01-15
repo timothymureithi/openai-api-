@@ -14,7 +14,7 @@
     <div id="notes-container" class="bulleted-list"></div>
     <script>
    const getStudyNotes = async() => {
-    const searchInput = "https://edition.cnn.com/2022/12/16/politics/house-republicans-white-house-bipartisan";
+    const searchInput = "https://edition.cnn.com";
     const prompt = `Please give me full sentences and statements from ${searchInput}`;
     const url = 'https://api.openai.com/v1/engines/davinci/completions';
     const apiKey = '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';
@@ -36,8 +36,8 @@
     const json = await response.json();
     let fullSentences = json.choices[0].text.match(/[^.!?]+[.]/g)
     fullSentences = fullSentences.map(sentence => sentence.replace(/https?:\/\/[^\s]+/g, ''))
-    const notesContainer = document.getElementById("notes-container");
-    notesContainer.innerHTML = "<ul><li>" + fullSentences.join("</li><li>") + "</li></ul>";
+    // const notesContainer = document.getElementById("notes-container");
+    // notesContainer.innerHTML = "<ul><li>" + fullSentences.join("</li><li>") + "</li></ul>";
 }
 
 
